@@ -23,6 +23,15 @@
     android:orientation="vertical"
     tools:context="com.xengar.android.booksearch.ui.BookListActivity">
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
     <ListView
         android:id="@+id/lvBooks"
         android:layout_width="match_parent"

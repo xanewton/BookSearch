@@ -19,12 +19,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.xengar.android.booksearch.data.Book;
-import com.xengar.android.booksearch.adapters.BookAdapter;
-import com.xengar.android.booksearch.sync.BookClient;
 import com.xengar.android.booksearch.R;
+import com.xengar.android.booksearch.adapters.BookAdapter;
+import com.xengar.android.booksearch.data.Book;
+import com.xengar.android.booksearch.sync.BookClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,7 @@ public class BookListActivity extends AppCompatActivity {
     private ListView lvBooks;
     private BookAdapter bookAdapter;
     private BookClient client;
+    private ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class BookListActivity extends AppCompatActivity {
         ArrayList<Book> aBooks = new ArrayList<Book>();
         bookAdapter = new BookAdapter(this, aBooks);
         lvBooks.setAdapter(bookAdapter);
+
+        progress = (ProgressBar) findViewById(R.id.progress);
 
         // Fetch the data remotely
         fetchBooks();
@@ -65,6 +69,9 @@ public class BookListActivity extends AppCompatActivity {
     // Executes an API call to the OpenLibrary search endpoint, parses the results
     // Converts them into an array of book objects and adds them to the adapter
     private void fetchBooks() {
+        // Show progress bar before making network request
+        progress.setVisibility(ProgressBar.VISIBLE);
+
         client = new BookClient(); // "oscar Wilde", "wilkie Collins",
         client.getBooks("wilkie Collins", new JsonHttpResponseHandler() {
             @Override
@@ -83,11 +90,20 @@ public class BookListActivity extends AppCompatActivity {
                             bookAdapter.add(book); // add book through the adapter
                         }
                         bookAdapter.notifyDataSetChanged();
+
+                        // hide progress bar
+                        progress.setVisibility(ProgressBar.GONE);
                     }
                 } catch (JSONException e) {
                     // Invalid JSON format, show appropriate error.
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString,
+                                  Throwable throwable) {
+                progress.setVisibility(ProgressBar.GONE);
             }
         });
     }
