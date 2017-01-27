@@ -17,6 +17,7 @@ package com.xengar.android.booksearch.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.ListView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -52,6 +53,14 @@ public class BookListActivity extends AppCompatActivity {
         // Fetch the data remotely
         fetchBooks();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_book_list, menu);
+        return true;
+    }
+
 
     // Executes an API call to the OpenLibrary search endpoint, parses the results
     // Converts them into an array of book objects and adds them to the adapter
