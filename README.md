@@ -2,6 +2,7 @@ Book Search
 ============
 
 ![alt tag](https://github.com/an-garcia/BookSearch/blob/master/readmeImages/Screenshot_1485555057.png)
+![alt tag](https://github.com/an-garcia/BookSearch/blob/master/readmeImages/Screenshot_1485559486.png)
 
 Android application to display a list of books and search for a specific item.
 Based on [tutorial](http://guides.codepath.com/android/Book-Search-Tutorial)

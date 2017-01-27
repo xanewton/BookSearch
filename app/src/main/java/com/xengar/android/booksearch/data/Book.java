@@ -21,12 +21,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Book
  */
-public class Book {
+public class Book implements Serializable {
     private String openLibraryId;
     private String author;
     private String title;
