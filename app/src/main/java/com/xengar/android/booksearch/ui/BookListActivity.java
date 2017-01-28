@@ -16,6 +16,7 @@
 package com.xengar.android.booksearch.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -47,10 +48,15 @@ import cz.msebera.android.httpclient.Header;
 public class BookListActivity extends AppCompatActivity {
 
     public static final String BOOK_DETAIL_KEY = "book";
+    public static final String SHARED_PREF_NAME = "com.xengar.android.booksearch";
+    public static final String QUERY = "query";
+    public static final String DEFAULT_QUERY = "oscar Wilde";
+
     private ListView lvBooks;
     private BookAdapter bookAdapter;
     private BookClient client;
     private ProgressBar progress;
+    private String query = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +70,11 @@ public class BookListActivity extends AppCompatActivity {
 
         progress = (ProgressBar) findViewById(R.id.progress);
 
+
+        SharedPreferences prefs = getSharedPreferences(SHARED_PREF_NAME, 0);
+        query = prefs.getString(QUERY, DEFAULT_QUERY);
         // Fetch the data remotely
-        fetchBooks("oscar Wilde");
+        fetchBooks(query);
         setupBookSelectedListener();
     }
 
@@ -102,6 +111,8 @@ public class BookListActivity extends AppCompatActivity {
     // Executes an API call to the OpenLibrary search endpoint, parses the results
     // Converts them into an array of book objects and adds them to the adapter
     private void fetchBooks(String query) {
+        this.query = query; // Save in the object
+
         // Show progress bar before making network request
         progress.setVisibility(ProgressBar.VISIBLE);
 
@@ -146,6 +157,12 @@ public class BookListActivity extends AppCompatActivity {
         lvBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Save the current query
+                SharedPreferences prefs = getSharedPreferences(SHARED_PREF_NAME, 0);
+                SharedPreferences.Editor e = prefs.edit();
+                e.putString(QUERY, query);
+                e.commit();
+
                 // Launch the detail view passing book as an extra
                 Intent intent = new Intent(BookListActivity.this, BookDetailActivity.class);
                 intent.putExtra(BOOK_DETAIL_KEY, bookAdapter.getItem(position));
