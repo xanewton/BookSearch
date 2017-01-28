@@ -103,9 +103,7 @@ public class BookDetailActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_share) {
+        if (id == R.id.action_share) {
             setShareIntent();
             return true;
         }
