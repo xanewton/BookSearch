@@ -4,7 +4,9 @@ Book Search
 ![alt tag](https://github.com/an-garcia/BookSearch/blob/master/readmeImages/Screenshot_1485555057.png)
 ![alt tag](https://github.com/an-garcia/BookSearch/blob/master/readmeImages/Screenshot_1485563632.png)
 
-Android application to display a list of books. \n It allows search by author and title.\n
+Android application to searches the [OpenLibrary API](https://openlibrary.org/developers/api)
+to search books and display cover images.
+It also allows you to recommend books to friends, search by author and title.\n
 Based on [tutorial](http://guides.codepath.com/android/Book-Search-Tutorial)
 
 Pre-requisites
