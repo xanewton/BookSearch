@@ -1,8 +1,8 @@
 Book Search
 ============
 
-![alt tag](https://github.com/an-garcia/BookSearch/blob/master/readmeImages/Screenshot_1485555057.png)
-![alt tag](https://github.com/an-garcia/BookSearch/blob/master/readmeImages/Screenshot_1485563632.png)
+![Scheme](/readmeImages/Screenshot_1485555057.png)
+![Scheme](/readmeImages/Screenshot_1485563632.png)
 
 Android application to search books by author or title and display cover images.
 It uses [OpenLibrary API](https://openlibrary.org/developers/api) and allows you to recommend books to friends.
